@@ -2,19 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-    render() {
-        return (
-            <button
-                className="square"
-                onClick={() => {
-                    this.props.onMyClick({ value: 'X' });
-                    console.log('CLicked field :)');
-                }}>
-                {this.props.value}
-            </button>
-        );
-    }
+
+function Square(props) {
+    // function component takes "props" as argumnet and returns  what should be rendered.
+    return (
+        <button
+            className="square"
+            onClick={props.onMyClick}>
+            {props.value}
+        </button>
+    );
 }
 
 class Board extends React.Component {

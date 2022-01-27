@@ -4,7 +4,7 @@ import './index.css';
 
 
 function Square(props) {
-    // function component takes "props" as argumnet and returns  what should be rendered.
+    // "function component" takes "props" as argument and returns  what should be rendered.
     return (
         <button
             className="square"
@@ -15,18 +15,29 @@ function Square(props) {
 }
 
 class Board extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             squares: Array(9).fill(null),
+            xIsNext: true,
         };
-
     }
 
     handleMyClick(i) {
         const tempSquares = this.state.squares.slice();  // slice to create copy 
-        tempSquares[i] = 'X';
-        this.setState({ squares: tempSquares })
+        // if (this.state.xIsNext) {
+        //     tempSquares[i] = 'X';
+        //     this.setState({ xIsNext: false });
+        // } else {
+        //     tempSquares[i] = 'O';
+        //     this.setState({ xIsNext: true });
+        // }
+        tempSquares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: tempSquares,
+            xIsNext: !this.state.xIsNext,
+        });
     }
 
     renderSquare(i) {
@@ -39,7 +50,7 @@ class Board extends React.Component {
     }
 
     render() {
-        const status = 'Next player: X';
+        const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
         return (
             <div>
